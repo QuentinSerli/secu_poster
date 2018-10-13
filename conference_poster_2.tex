@@ -36,6 +36,7 @@
 
 \usepackage{booktabs} % Top and bottom rules for tables
 
+\usepackage[normalem]{ulem}
 \graphicspath{{figures/}} % Location of the graphics files
 
 \usecaptiontemplate{\small\structure{\insertcaptionname~\insertcaptionnumber: }\insertcaption} % A fix for figure numbering
@@ -86,6 +87,7 @@
 
 		\begin{column}{.875\textwidth}
 			\begin{enumerate}
+			\uline{\textbf{Symptomes}}
 			\item Les utilisateurs peuvent soumettre des données au service.
 			\item Ces données ne sont pas filtrées. \textbf{par exemple:} Robert'); DROP TABLE students;\# 
 			\item Ces données sont directement utilisées dans des requêtes. \textbf{par exemple:} INSERT INTO students(name) VALUES('\$student\_name')
@@ -97,6 +99,7 @@
 	\begin{columns}
 	\begin{column}{.5\textwidth} % The second subdivided column within the first main column
 	\textbf{Effets}
+	\uline{\textbf{Effets}}
 	\begin{itemize}
 		\item Compromission totale de la base de données.
 		\item Prise de contrôle du serveur.
@@ -105,13 +108,13 @@
 		\end{column}
 
 	\begin{column}{.5\textwidth} % The second subdivided column within the first main column
-	\textbf{Prévention}
 	\begin{itemize}
 		\item Requêtes paramétrisées ("INSERT INTO x(a,b,c) VALUES(?,?,?)")
 		\item Whitelisting des entrées 
 		\item Echapper les caractères spéciaux
 	\end{itemize}
 		\end{column}
+		\uline{\textbf{Prévention}}
 	\end{columns}
 
 \end{block}
