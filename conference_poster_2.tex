@@ -76,14 +76,32 @@
 %	OBJECTIVES
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Objectives}
+\begin{block}{1: Injections}
 
-\begin{enumerate}
-\item Donec fringilla, velit id lobortis commodo, eros dui consectetur mi, ut interdum lorem dui sed mauris.
-\item Nulla ac nulla rhoncus est bibendum ullamcorper:
-\item Quisque vestibulum, nisl sit amet gravida ultricies dis parturient montes, nascetur ridiculus musobortis commodo, eros dui consectetur mi.
-\end{enumerate}
+	\begin{columns}
 
+		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
+			\includegraphics[scale=0.33]{syringe.png}
+		\end{column}
+
+		\begin{column}{.875\textwidth}
+			\begin{enumerate}
+			\item Les utilisateurs peuvent soumettre des données au service.
+			\item Ces données ne sont pas filtrées. \textbf{par exemple:} Robert'); DROP TABLE students;-- 
+			\item Ces données sont directement utilisées dans des requêtes. \textbf{par exemple:} INSERT INTO students(name) VALUES('\$student\_name')
+			\item \textbf{BOOM} INSERT INTO students(name) VALUES('Robert'); DROP TABLE students;--\textit{')}
+			\end{enumerate}
+		\end{column}
+	\end{columns}
+
+	\textbf{Effets}
+	\begin{itemize}
+		\item Compromission totale de la base de données.
+		\item Perte de données client.
+		\item Prise de contrôle du serveur par un pirate.
+		\item Piratage de comptes utilisateurs.
+		\item ... et bien d'autres choses affreuses.
+	\end{itemize}
 \end{block}
 
 %----------------------------------------------------------------------------------------
