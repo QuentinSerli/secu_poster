@@ -79,26 +79,28 @@
 
 \begin{block}{1: Injections}
 
-	\begin{columns}
+	\begin{columns}[T]
 
 		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
 			\includegraphics[scale=0.33]{syringe.png}
 		\end{column}
 
 		\begin{column}{.875\textwidth}
-			\begin{enumerate}
 			\uline{\textbf{Symptomes}}
+			\begin{itemize}
 			\item Les utilisateurs peuvent soumettre des données au service.
 			\item Ces données ne sont pas filtrées. \textbf{par exemple:} Robert'); DROP TABLE students;\# 
-			\item Ces données sont directement utilisées dans des requêtes. \textbf{par exemple:} INSERT INTO students(name) VALUES('\$student\_name')
-			\item \textbf{BOOM} INSERT INTO students(name) VALUES('Robert'); DROP TABLE students;\#\textit{')}
-			\end{enumerate}
+			\end{itemize}
 		\end{column}
 	\end{columns}
+	\begin{itemize}
+		\item Ces données sont directement utilisées dans des requêtes. \textbf{par exemple:} INSERT INTO students(name) VALUES('\$student\_name')
+		\item \textbf{BOOM} INSERT INTO students(name) VALUES('Robert'); DROP TABLE students;\#\textit{')}
+	\end{itemize}
 
-	\begin{columns}
+	\begin{columns}[T]
 	\begin{column}{.5\textwidth} % The second subdivided column within the first main column
-	\textbf{Effets}
+	\vfill
 	\uline{\textbf{Effets}}
 	\begin{itemize}
 		\item Compromission totale de la base de données.
@@ -108,13 +110,14 @@
 		\end{column}
 
 	\begin{column}{.5\textwidth} % The second subdivided column within the first main column
-	\begin{itemize}
-		\item Requêtes paramétrisées ("INSERT INTO x(a,b,c) VALUES(?,?,?)")
-		\item Whitelisting des entrées 
-		\item Echapper les caractères spéciaux
-	\end{itemize}
-		\end{column}
+		\vfill
 		\uline{\textbf{Prévention}}
+		\begin{itemize}
+			\item Requêtes paramétrisées ("INSERT INTO x(a,b,c) VALUES(?,?,?)")
+			\item Whitelisting des entrées 
+			\item Echapper les caractères spéciaux
+		\end{itemize}
+	\end{column}
 	\end{columns}
 
 \end{block}
@@ -125,19 +128,45 @@
             
 \begin{block}{2: Authentification cassée}
 
-	\begin{columns}
+	\begin{columns}[T]
 
 		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
 			\includegraphics[scale=2.3]{rimlock.png}
 		\end{column}
 
 		\begin{column}{.875\textwidth}
-			\begin{enumerate}
-			\item Les utilisateurs peuvent soumettre des données au service.
-			\item Ces données ne sont pas filtrées. \textbf{par exemple:} Robert'); DROP TABLE students;\# 
-			\item Ces données sont directement utilisées dans des requêtes. \textbf{par exemple:} INSERT INTO students(name) VALUES('\$student\_name')
-			\item \textbf{BOOM} INSERT INTO students(name) VALUES('Robert'); DROP TABLE students;\#\textit{')}
-			\end{enumerate}
+			\uline{\uline{\textbf{Symptomes}}}
+			\begin{itemize}
+				\item L'authentification n'est pas chiffrée (on peut intercepter les mots de passe)
+			\end{itemize}
+		\end{column}
+	\end{columns}
+	\begin{itemize}
+		\item Le token de session est facilement deviné (nom d'utiliateur, timestamp)
+		\item Mots de passe faibles acceptés (P4ssword)
+		\item ID de session exposé dans les URLs
+		\item Pas de blocage après X tentatives de connexion
+		\item Mots de passe stockés en clair dans les bases de données.
+	\end{itemize}
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\vfill
+			\uline{\textbf{Effets}}
+			\begin{itemize}
+				\item Vol d'identité
+				\item Fuite de données sensibles
+				\item Prise de contrôle du serveur par un acteur malveillant.
+			\end{itemize}
+			\vfill
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\vfill
+			\uline{\textbf{Prévention}}
+			\begin{itemize}
+				\item Hacher et saler les mots de passe (Argon2,Bcrypt,SHA-256/512)
+				\item Tokens de sessions aléatoires
+				\item Cooldown/blockage de l'authentification
+			\end{itemize}
 		\end{column}
 	\end{columns}
 
