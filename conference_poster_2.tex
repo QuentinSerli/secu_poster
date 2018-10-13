@@ -120,11 +120,24 @@
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
             
-\begin{block}{Introduction}
+\begin{block}{2: Authentification cassée}
 
-\begin{itemize}
-\item Donec fringilla, velit id lobortis commodo, eros dui consectetur mi, ut interdum lorem dui sed mauris. Duis id sem nunc, a pharetra odio. Phasellus posuere \alert{semper massa}, id bibendum ligula tristique at. Integer sit amet vulputate turpis. Sed erat lacus, faucibus at viverra et, mattis nec sem. Cras faucibus \alert{scelerisque} cursus. Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis. Nulla eu erat a urna laoreet auctor id a turpis. Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis. Aenean id neque dolor.
-\end{itemize}
+	\begin{columns}
+
+		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
+			\includegraphics[scale=2.3]{rimlock.png}
+		\end{column}
+
+		\begin{column}{.875\textwidth}
+			\begin{enumerate}
+			\item Les utilisateurs peuvent soumettre des données au service.
+			\item Ces données ne sont pas filtrées. \textbf{par exemple:} Robert'); DROP TABLE students;\# 
+			\item Ces données sont directement utilisées dans des requêtes. \textbf{par exemple:} INSERT INTO students(name) VALUES('\$student\_name')
+			\item \textbf{BOOM} INSERT INTO students(name) VALUES('Robert'); DROP TABLE students;\#\textit{')}
+			\end{enumerate}
+		\end{column}
+	\end{columns}
+
 
 \end{block}
 
