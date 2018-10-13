@@ -177,39 +177,50 @@
 %	MATERIALS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Materials}
+\begin{block}{Exposition de données sensibles}
+	\begin{columns}[T]
 
-\begin{columns} % Subdivide the first main column
-\begin{column}{.54\textwidth} % The first subdivided column within the first main column
-\begin{itemize}
-\item Vestibulum nisl, quis euismod velit eros in ligula.
-\begin{itemize}
-\item Cras rhoncus quam et augue convallis in elementum urna tincidunt.
-\end{itemize}
-\item Proin ut vestibulum augue.
-\begin{itemize}
-\item Donec dapibus sagittis neque eu ultrices.
-\end{itemize}
-\end{itemize}
-\end{column}
+		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
+			\includegraphics[scale=1.35]{binoculars.png}
+		\end{column}
 
-\begin{column}{.43\textwidth} % The second subdivided column within the first main column
-\centering
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{placeholder.jpg}
-\caption{Figure caption}
-\end{figure}
-\end{column}
-\end{columns} % End of the subdivision
+		\begin{column}{.875\textwidth}
+			\uline{\uline{\textbf{Symptomes}}}
+			\begin{itemize}
+				\item L'authentification n'est pas chiffrée (on peut intercepter les mots de passe)
+			\end{itemize}
+		\end{column}
+	\end{columns}
+	\begin{itemize}
+		\item Le token de session est facilement deviné (nom d'utiliateur, timestamp)
+		\item Mots de passe faibles acceptés (P4ssword)
+		\item ID de session exposé dans les URLs
+		\item Pas de blocage après X tentatives de connexion
+		\item Mots de passe stockés en clair dans les bases de données.
+	\end{itemize}
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\vfill
+			\uline{\textbf{Effets}}
+			\begin{itemize}
+				\item Vol d'identité
+				\item Fuite de données sensibles
+				\item Prise de contrôle du serveur par un acteur malveillant.
+			\end{itemize}
+			\vfill
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\vfill
+			\uline{\textbf{Prévention}}
+			\begin{itemize}
+				\item Hacher et saler les mots de passe (Argon2,Bcrypt,SHA-256/512)
+				\item Tokens de sessions aléatoires
+				\item Cooldown/blockage de l'authentification
+			\end{itemize}
+		\end{column}
+	\end{columns}
 
-\begin{itemize}
-\item Curabitur sapien ligula, faucibus in feugiat quis, vestibulum a turpis.
-\begin{itemize}
-\item Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
-\item Ut nec ipsum in lectus ultrices sagittis.
-\item Phasellus quis nunc neque.
-\end{itemize}
-\end{itemize}
+
 
 \end{block}
 
