@@ -81,8 +81,10 @@
 
 	\begin{columns}[T]
 
-		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
-			\includegraphics[scale=0.33]{syringe.png}
+		\begin{column}{.01\textwidth}
+		\end{column}
+		\begin{column}{.115\textwidth} % The second subdivided column within the first main column
+			\includegraphics[scale=1.35]{syringe.png}
 		\end{column}
 
 		\begin{column}{.875\textwidth}
@@ -130,7 +132,9 @@
 
 	\begin{columns}[T]
 
-		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
+		\begin{column}{.01\textwidth}
+		\end{column}
+		\begin{column}{.115\textwidth} % The second subdivided column within the first main column
 			\includegraphics[scale=2.3]{rimlock.png}
 		\end{column}
 
@@ -163,7 +167,7 @@
 			\vfill
 			\uline{\textbf{Prévention}}
 			\begin{itemize}
-				\item Hacher et saler les mots de passe (Argon2,Bcrypt,SHA-256/512)
+				\item Obligation d'utiliser des mots de passe forts.
 				\item Tokens de sessions aléatoires
 				\item Cooldown/blockage de l'authentification
 			\end{itemize}
@@ -180,23 +184,24 @@
 \begin{block}{Exposition de données sensibles}
 	\begin{columns}[T]
 
-		\begin{column}{.125\textwidth} % The second subdivided column within the first main column
+		\begin{column}{.01\textwidth}
+		\end{column}
+		\begin{column}{.115\textwidth} % The second subdivided column within the first main column
 			\includegraphics[scale=1.35]{binoculars.png}
 		\end{column}
 
 		\begin{column}{.875\textwidth}
 			\uline{\uline{\textbf{Symptomes}}}
 			\begin{itemize}
-				\item L'authentification n'est pas chiffrée (on peut intercepter les mots de passe)
+				\item Données transmises sans chiffrement (http,smtp, ftp,...)
+				\item Données stockées sans chiffrement
+				\item Algorithmes de chiffrement obsolets 
 			\end{itemize}
 		\end{column}
 	\end{columns}
 	\begin{itemize}
-		\item Le token de session est facilement deviné (nom d'utiliateur, timestamp)
-		\item Mots de passe faibles acceptés (P4ssword)
-		\item ID de session exposé dans les URLs
-		\item Pas de blocage après X tentatives de connexion
-		\item Mots de passe stockés en clair dans les bases de données.
+		\item Backups stockés sans chiffrement 
+		\item Clés de chiffrement à mot de passe faible
 	\end{itemize}
 	\begin{columns}[T]
 		\begin{column}{0.5\textwidth}
@@ -205,7 +210,7 @@
 			\begin{itemize}
 				\item Vol d'identité
 				\item Fuite de données sensibles
-				\item Prise de contrôle du serveur par un acteur malveillant.
+				\item Perte de contrôle du SI en cas de brêche des bases de données d'administration
 			\end{itemize}
 			\vfill
 		\end{column}
@@ -213,9 +218,12 @@
 			\vfill
 			\uline{\textbf{Prévention}}
 			\begin{itemize}
-				\item Hacher et saler les mots de passe (Argon2,Bcrypt,SHA-256/512)
-				\item Tokens de sessions aléatoires
-				\item Cooldown/blockage de l'authentification
+				\item Classification des données manipulées par sensibilité et stockage différencié.
+				\item Ne pas stocker les données qui peuvent être facilement resoumises par l'utilisateur, ou utiliser une tokenization/troncation.
+				\item Ne pas conserver en cache des données sensibles.
+				\item Chiffrer les données au repos.
+				\item Chiffrer les données en transit (TLS par éxemple)
+				\item Hacher et saler les mots de passe (Argon2, scrypt, bcrypt, pbkdf2).
 			\end{itemize}
 		\end{column}
 	\end{columns}
