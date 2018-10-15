@@ -290,33 +290,57 @@
 	\end{columns}
 \end{block}
 
+\begin{block}{Exposition de données sensibles}
+	\begin{columns}[T]
 
-%----------------------------------------------------------------------------------------
-%	METHODS
-%----------------------------------------------------------------------------------------
+		\begin{column}{.12\textwidth} % The second subdivided column within the first main column
+			\includegraphics[scale=1.35]{access.png}
+		\end{column}
 
-
-%----------------------------------------------------------------------------------------
-%	MATHEMATICAL SECTION
-%----------------------------------------------------------------------------------------
-
-\begin{block}{Mathematical Section}
-
-\begin{itemize}
-\item Maecenas Ultricies Feugiat Velit Non Mattis.
-\begin{itemize}
-\item Duis ante erat, bibendum nec tempus nec, interdum quis est. Nulla at mollis tortor. Phasellus quis leo dolor, aliquam laoreet orci $X$ Donec dapibus sagittis neque eu nec, interdum quis est. $Y_n, n=1,\cdots,N$ ndum nec tempus nec, interd
-\begin{align*}
-X \rightarrow r(X) & = \arg \max_{c} \Big\{ \max_n \big\{ \sum_{x_i \in X} \delta(x_i,Y_{n,c})\big\} \Big\} 
-\end{align*}
-\item Cras faucibus scelerisque cursus. Proin ut vestibulum augue. $\delta(x_i,Y_{n,c})$
-\end{itemize}
-\item Fusce tempus arcu id ligula varius dictum. Donec ut nisl dui, ac consectetur elit. In nec enim porta augue venenatis sollicitudin. Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
-\end{itemize}
-
+		\begin{column}{.88\textwidth}
+			\uline{\uline{\textbf{Symptomes}}}
+			\begin{itemize}
+				\item L'application accepte du XML ou permets de l'upload de XML
+                \item N'importe lequel des processeurs XML a le
+                    \href{https://www.w3schools.com/xml/xml_dtd_intro.asp}{\uline{\textit{DTD}}}
+                    activé
+				\item Si l'application utilise du SAML pour l'authentification
+                    Single Sign On, vérifier qu'elle n'est pas vulnérable.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+    \begin{itemize}
+        \item Si l'application utilise SOAP $<$ 1.2 vérifier qu'elle n'est
+            pas vulnérable.
+    \end{itemize}
+	\begin{columns}[T]
+		\begin{column}{.01\textwidth}
+		\end{column}
+		\begin{column}{0.495\textwidth}
+			\vfill
+			\uline{\textbf{Effets}}
+			\begin{itemize}
+                \item Attaque par déni de service (notamment l'attaque \textit{Billion
+                    Laughs}
+				\item Fuite de données sensibles
+                \item Scan des systèmes internes au SI
+                \item Facilitation d'autres attaques
+			\end{itemize}
+			\vfill
+		\end{column}
+		\begin{column}{0.495\textwidth}
+			\vfill
+			\uline{\textbf{Prévention}}
+			\begin{itemize}
+				\item Utiliser du JSON plutôt que du XML
+                \item Mettre à jour les librairies et processeurs XML
+                \item Désactiver les entités xml externes et le DTD
+                \item Implementer une whitelist coté serveur pour empêcher
+                    l'injection de XML hostile.
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{block}
-
-%----------------------------------------------------------------------------------------
 
 \end{column} % End of the first column
 
