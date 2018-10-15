@@ -101,7 +101,9 @@
 	\end{itemize}
 
 	\begin{columns}[T]
-	\begin{column}{.5\textwidth} % The second subdivided column within the first main column
+    \begin{column}{.01\textwidth}
+    \end{column}
+	\begin{column}{.45\textwidth} % The second subdivided column within the first main column
 	\vfill
 	\uline{\textbf{Effets}}
 	\begin{itemize}
@@ -111,7 +113,7 @@
 	\end{itemize}
 		\end{column}
 
-	\begin{column}{.5\textwidth} % The second subdivided column within the first main column
+	\begin{column}{.45\textwidth} % The second subdivided column within the first main column
 		\vfill
 		\uline{\textbf{Prévention}}
 		\begin{itemize}
@@ -153,7 +155,9 @@
 		\item Mots de passe stockés en clair dans les bases de données.
 	\end{itemize}
 	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
+        \begin{column}{.01\textwidth}
+		\end{column}
+        \begin{column}{0.495\textwidth}
 			\vfill
 			\uline{\textbf{Effets}}
 			\begin{itemize}
@@ -163,7 +167,7 @@
 			\end{itemize}
 			\vfill
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.495\textwidth}
 			\vfill
 			\uline{\textbf{Prévention}}
 			\begin{itemize}
@@ -204,7 +208,9 @@
 		\item Clés de chiffrement à mot de passe faible
 	\end{itemize}
 	\begin{columns}[T]
-		\begin{column}{0.5\textwidth}
+		\begin{column}{.01\textwidth}
+		\end{column}
+		\begin{column}{0.495\textwidth}
 			\vfill
 			\uline{\textbf{Effets}}
 			\begin{itemize}
@@ -214,7 +220,7 @@
 			\end{itemize}
 			\vfill
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.495\textwidth}
 			\vfill
 			\uline{\textbf{Prévention}}
 			\begin{itemize}
@@ -232,34 +238,63 @@
 
 \end{block}
 
+\begin{block}{Exposition de données sensibles}
+	\begin{columns}[T]
+
+		\begin{column}{.12\textwidth} % The second subdivided column within the first main column
+			\includegraphics[scale=1.35]{xml.png}
+		\end{column}
+
+		\begin{column}{.88\textwidth}
+			\uline{\uline{\textbf{Symptomes}}}
+			\begin{itemize}
+				\item L'application accepte du XML ou permets de l'upload de XML
+                \item N'importe lequel des processeurs XML a le
+                    \href{https://www.w3schools.com/xml/xml_dtd_intro.asp}{\uline{\textit{DTD}}}
+                    activé
+				\item Si l'application utilise du SAML pour l'authentification
+                    Single Sign On, vérifier qu'elle n'est pas vulnérable.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+    \begin{itemize}
+        \item Si l'application utilise SOAP $<$ 1.2 vérifier qu'elle n'est
+            pas vulnérable.
+    \end{itemize}
+	\begin{columns}[T]
+		\begin{column}{.01\textwidth}
+		\end{column}
+		\begin{column}{0.495\textwidth}
+			\vfill
+			\uline{\textbf{Effets}}
+			\begin{itemize}
+                \item Attaque par déni de service (notamment l'attaque \textit{Billion
+                    Laughs}
+				\item Fuite de données sensibles
+                \item Scan des systèmes internes au SI
+                \item Facilitation d'autres attaques
+			\end{itemize}
+			\vfill
+		\end{column}
+		\begin{column}{0.495\textwidth}
+			\vfill
+			\uline{\textbf{Prévention}}
+			\begin{itemize}
+				\item Utiliser du JSON plutôt que du XML
+                \item Mettre à jour les librairies et processeurs XML
+                \item Désactiver les entités xml externes et le DTD
+                \item Implementer une whitelist coté serveur pour empêcher
+                    l'injection de XML hostile.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{block}
+
+
 %----------------------------------------------------------------------------------------
 %	METHODS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Methods}
-
-\begin{itemize}
-\item Maecenas Vel Nisl Elit
-\begin{itemize}
-\item Suspendisse potenti. Fusce a est eget turpis rhoncus varius sed sed dui. Cras justo nibh, bibendum a cursus eget, consequat et dui. Maecenas vel nisl elit, sed dignissim dolor. 
-\item In hac habitasse platea dictumst.
-\end{itemize}
-
-\item Viewpoint Matching Constraints
-\begin{itemize}
-\item Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-\item Proin in nisi diam.
-\item Nam ultricies pellentesque nunc, ultrices volutpat nisl ultrices a.
-\end{itemize}
-
-\item Volutpat 
-\begin{itemize}
-\item Duis semper lorem eget dui dignissim porttitor.
-\item Nulla facilisi. In ullamcorper lorem quis dolor.
-\end{itemize}
-\end{itemize}
-
-\end{block}
 
 %----------------------------------------------------------------------------------------
 %	MATHEMATICAL SECTION
@@ -388,12 +423,11 @@ Treatment 3 & 0.0009271 & 0.296 \\
 
 \setbeamercolor{block title}{fg=black,bg=orange!70} % Change the block title color
 
-\begin{block}{Contact Information}
+\begin{block}{Contact}
 
 \begin{itemize}
-\item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
-\item Email: \href{mailto:john@smith.com}{john@smith.com}
-\item Phone: +1 (000) 111 1111
+\item Web: \href{https://www.serli.com}{https://www.serli.com}
+\item Email: \href{mailto:quentin.mallet@serli.com}{quentin.mallet@serli.com}
 \end{itemize}
 
 \end{block}
