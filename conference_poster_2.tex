@@ -21,7 +21,7 @@
 
 \documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
 
-\usepackage[orientation=portrait,size=a0, scale=1]{beamerposter} % Use the beamerposter package for laying out the poster with a portrait orientation and an a0 paper size
+\usepackage[orientation=portrait,size=a0, scale=1.20]{beamerposter} % Use the beamerposter package for laying out the poster with a portrait orientation and an a0 paper size
 
 \usetheme{I6pd2} % Use the I6pd2 theme supplied with this template
 
@@ -197,19 +197,17 @@
 		\begin{column}{.88\textwidth}
 			\uline{\uline{\textbf{Symptomes}}}
 			\begin{itemize}
-				\item L'application accepte du XML ou permets de l'upload de XML
-                \item N'importe lequel des processeurs XML a le
-                    \href{https://www.w3schools.com/xml/xml_dtd_intro.asp}{\uline{\textit{DTD}}}
-                    activé
-				\item Si l'application utilise du SAML pour l'authentification
-                    Single Sign On, vérifier qu'elle n'est pas vulnérable.
+				\item L'implémentation du contrôle d'accès est inégale selon les verbes HTTP utilisés (implémenté pour GET mais pas pour POST, PUT ou DELETE).
+                \item Les données d'authentification transitent dans l'URL ou en clair non signé dans le corps des requêtes.
 			\end{itemize}
 		\end{column}
 	\end{columns}
-    \begin{itemize}
-        \item Si l'application utilise SOAP $<$ 1.2 vérifier qu'elle n'est
-            pas vulnérable.
-    \end{itemize}
+
+	\begin{itemize}
+		\item Possibilité d'agir comme utilisateur sans être authentifié (accès direct URL par exemple)
+		\item Possibilité d'attaquer par rejeu en utilisant les token d'authentification (eg: JWT)
+	\end{itemize}
+
 	\begin{columns}[T]
 		\begin{column}{.01\textwidth}
 		\end{column}
@@ -217,11 +215,9 @@
 			\vfill
 			\uline{\textbf{Effets}}
 			\begin{itemize}
-                \item Attaque par déni de service (notamment l'attaque \textit{Billion
-                    Laughs}
-				\item Fuite de données sensibles
-                \item Scan des systèmes internes au SI
-                \item Facilitation d'autres attaques
+				\item Actions d'administration effectuées par des utilisateurs.
+				\item Perte de la non répudiation (les utilisateurs peuvent prétendre ne pas être à l'origine d'actions spécifiques).
+				\item Fuite de données sensibles (internes à l'application ou concernant le stack software).
 			\end{itemize}
 			\vfill
 		\end{column}
@@ -229,11 +225,14 @@
 			\vfill
 			\uline{\textbf{Prévention}}
 			\begin{itemize}
-				\item Utiliser du JSON plutôt que du XML
-                \item Mettre à jour les librairies et processeurs XML
-                \item Désactiver les entités xml externes et le DTD
-                \item Implementer une whitelist coté serveur pour empêcher
-                    l'injection de XML hostile.
+				\item Refuser l'accès aux ressources par défaut.
+				\item Implémenter le contrôle d'accès au sein d'UN service et le réutiliser à travers l'application.
+				\item Les modèles utilisés pour le contrôle d'accès doivent reposer sur la propriété plutôt que sur le droit (utilisateur A propriétaire de la donnée X plutot que utilisateur A a le droit de modifier toutes les données de type X).
+				\item Les modèles utilisés doivent contenir des limites d'accès et de manipulation basées sur les règles métier (les utilisateurs ayant le Rôle A ne doivent pas pouvoir accéder aux actions V,W et X sur les objets de type Z)
+				\item Désactiver le listing des dossier sur le web server et s'assurer que les métadonnées et fichiers de sauvegardes ne sont pas dans le web root (.git par exemple).
+				\item Logger les échecs d'authentifcation et mettre en place un système de notification.
+				\item Implémenter du rate limiting sur les API pour diminuer les dégats occasionés par des outils d'attaque automatisés.
+				\item Invaliders les tokens JWT au moment du logout.
 			\end{itemize}
 		\end{column}
 	\end{columns}
