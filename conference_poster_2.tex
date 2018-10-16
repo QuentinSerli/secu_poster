@@ -21,7 +21,7 @@
 
 \documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
 
-\usepackage[orientation=portrait,size=a0, scale=1.20]{beamerposter} % Use the beamerposter package for laying out the poster with a portrait orientation and an a0 paper size
+\usepackage[orientation=portrait,size=a0, scale=0.90]{beamerposter} % Use the beamerposter package for laying out the poster with a portrait orientation and an a0 paper size
 
 \usetheme{I6pd2} % Use the I6pd2 theme supplied with this template
 
@@ -175,8 +175,7 @@
 				\item Classification des données manipulées par sensibilité et stockage différencié.
 				\item Ne pas stocker les données qui peuvent être facilement resoumises par l'utilisateur, ou utiliser une tokenization/troncation.
 				\item Ne pas conserver en cache des données sensibles.
-				\item Chiffrer les données au repos.
-				\item Chiffrer les données en transit (TLS par éxemple)
+				\item Chiffrer les données au repos et en transit.
 				\item Hacher et saler les mots de passe (Argon2, scrypt, bcrypt, pbkdf2).
 			\end{itemize}
 		\end{column}
@@ -227,9 +226,6 @@
 			\begin{itemize}
 				\item Refuser l'accès aux ressources par défaut.
 				\item Implémenter le contrôle d'accès au sein d'UN service et le réutiliser à travers l'application.
-				\item Les modèles utilisés pour le contrôle d'accès doivent reposer sur la propriété plutôt que sur le droit (utilisateur A propriétaire de la donnée X plutot que utilisateur A a le droit de modifier toutes les données de type X).
-				\item Les modèles utilisés doivent contenir des limites d'accès et de manipulation basées sur les règles métier (les utilisateurs ayant le Rôle A ne doivent pas pouvoir accéder aux actions V,W et X sur les objets de type Z)
-				\item Désactiver le listing des dossier sur le web server et s'assurer que les métadonnées et fichiers de sauvegardes ne sont pas dans le web root (.git par exemple).
 				\item Logger les échecs d'authentifcation et mettre en place un système de notification.
 				\item Implémenter du rate limiting sur les API pour diminuer les dégats occasionés par des outils d'attaque automatisés.
 				\item Invaliders les tokens JWT au moment du logout.
@@ -295,7 +291,7 @@
 
 	\end{block}
 
-	\begin{block}{4: Entité Externe XML}
+	\begin{block}{4: Entités Externe XML}
 		\begin{columns}[T]
 
 			\begin{column}{.12\textwidth} % The second subdivided column within the first main column
@@ -317,6 +313,59 @@
 		\begin{itemize}
 			\item Si l'application utilise SOAP $<$ 1.2 vérifier qu'elle n'est
 				pas vulnérable.
+		\end{itemize}
+		\begin{columns}[T]
+			\begin{column}{.01\textwidth}
+			\end{column}
+			\begin{column}{0.495\textwidth}
+				\vfill
+				\uline{\textbf{Effets}}
+				\begin{itemize}
+					\item Attaque par déni de service (notamment l'attaque \textit{Billion
+						Laughs}
+					\item Fuite de données sensibles
+					\item Scan des systèmes internes au SI
+					\item Facilitation d'autres attaques
+				\end{itemize}
+				\vfill
+			\end{column}
+			\begin{column}{0.495\textwidth}
+				\vfill
+				\uline{\textbf{Prévention}}
+				\begin{itemize}
+					\item Utiliser du JSON plutôt que du XML
+					\item Mettre à jour les librairies et processeurs XML
+					\item Désactiver les entités xml externes et le DTD
+					\item Implementer une whitelist coté serveur pour empêcher
+						l'injection de XML hostile.
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+
+	\begin{block}{6: Erreurs de configuration}
+		\begin{columns}[T]
+
+			\begin{column}{.01\textwidth}
+			\end{column}
+			\begin{column}{.115\textwidth} % The second subdivided column within the first main column
+				\includegraphics[scale=1.35]{cog.png}
+			\end{column}
+
+			\begin{column}{.875\textwidth}
+				\uline{\uline{\textbf{Symptomes}}}
+				\begin{itemize}
+					\item Le stack n'a pas été mis à jour et contient des éléments vulnérables ou obsolets
+					\item Les permissions par défaut n'ont pas été revues et ont été laissées en place
+				\end{itemize}
+			\end{column}
+		\end{columns}
+		\begin{itemize}
+			\item Des ajouts non nécessaires ont été faits (backports, services, etc...)
+			\item Comptes par défauts toujours installés et accessibles, mots de passes non modifiés
+			\item La gestion d'erreur révèle des stacktrace aux utilisateurs
+			\item Pour les systèmes à jour: les dernières mesures de sécurité n'ont pas été activées ou n'ont pas été correctement configurées.
+			\item Les réglages de sécurité des frameworks (par exemple mot de passe de base de donnée) n'ont pas été configurés correctement.
 		\end{itemize}
 		\begin{columns}[T]
 			\begin{column}{.01\textwidth}
