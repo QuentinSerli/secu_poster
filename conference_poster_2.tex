@@ -129,63 +129,11 @@
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
-            
-\begin{block}{2: Authentification cassée}
-
-	\begin{columns}[T]
-
-		\begin{column}{.01\textwidth}
-		\end{column}
-		\begin{column}{.115\textwidth} % The second subdivided column within the first main column
-			\includegraphics[scale=2.3]{rimlock.png}
-		\end{column}
-
-		\begin{column}{.875\textwidth}
-			\uline{\uline{\textbf{Symptomes}}}
-			\begin{itemize}
-				\item L'authentification n'est pas chiffrée (on peut intercepter les mots de passe)
-			\end{itemize}
-		\end{column}
-	\end{columns}
-	\begin{itemize}
-		\item Le token de session est facilement deviné (nom d'utiliateur, timestamp)
-		\item Mots de passe faibles acceptés (P4ssword)
-		\item ID de session exposé dans les URLs
-		\item Pas de blocage après X tentatives de connexion
-		\item Mots de passe stockés en clair dans les bases de données.
-	\end{itemize}
-	\begin{columns}[T]
-        \begin{column}{.01\textwidth}
-		\end{column}
-        \begin{column}{0.495\textwidth}
-			\vfill
-			\uline{\textbf{Effets}}
-			\begin{itemize}
-				\item Vol d'identité
-				\item Fuite de données sensibles
-				\item Prise de contrôle du serveur par un acteur malveillant.
-			\end{itemize}
-			\vfill
-		\end{column}
-		\begin{column}{0.495\textwidth}
-			\vfill
-			\uline{\textbf{Prévention}}
-			\begin{itemize}
-				\item Obligation d'utiliser des mots de passe forts.
-				\item Tokens de sessions aléatoires
-				\item Cooldown/blockage de l'authentification
-			\end{itemize}
-		\end{column}
-	\end{columns}
-
-
-\end{block}
-
 %----------------------------------------------------------------------------------------
 %	MATERIALS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Exposition de données sensibles}
+\begin{block}{3: Exposition de données sensibles}
 	\begin{columns}[T]
 
 		\begin{column}{.01\textwidth}
@@ -238,59 +186,8 @@
 
 \end{block}
 
-\begin{block}{Exposition de données sensibles}
-	\begin{columns}[T]
 
-		\begin{column}{.12\textwidth} % The second subdivided column within the first main column
-			\includegraphics[scale=1.35]{xml.png}
-		\end{column}
-
-		\begin{column}{.88\textwidth}
-			\uline{\uline{\textbf{Symptomes}}}
-			\begin{itemize}
-				\item L'application accepte du XML ou permets de l'upload de XML
-                \item N'importe lequel des processeurs XML a le
-                    \href{https://www.w3schools.com/xml/xml_dtd_intro.asp}{\uline{\textit{DTD}}}
-                    activé
-				\item Si l'application utilise du SAML pour l'authentification
-                    Single Sign On, vérifier qu'elle n'est pas vulnérable.
-			\end{itemize}
-		\end{column}
-	\end{columns}
-    \begin{itemize}
-        \item Si l'application utilise SOAP $<$ 1.2 vérifier qu'elle n'est
-            pas vulnérable.
-    \end{itemize}
-	\begin{columns}[T]
-		\begin{column}{.01\textwidth}
-		\end{column}
-		\begin{column}{0.495\textwidth}
-			\vfill
-			\uline{\textbf{Effets}}
-			\begin{itemize}
-                \item Attaque par déni de service (notamment l'attaque \textit{Billion
-                    Laughs}
-				\item Fuite de données sensibles
-                \item Scan des systèmes internes au SI
-                \item Facilitation d'autres attaques
-			\end{itemize}
-			\vfill
-		\end{column}
-		\begin{column}{0.495\textwidth}
-			\vfill
-			\uline{\textbf{Prévention}}
-			\begin{itemize}
-				\item Utiliser du JSON plutôt que du XML
-                \item Mettre à jour les librairies et processeurs XML
-                \item Désactiver les entités xml externes et le DTD
-                \item Implementer une whitelist coté serveur pour empêcher
-                    l'injection de XML hostile.
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{block}
-
-\begin{block}{Exposition de données sensibles}
+\begin{block}{5: Contrôle d'Accès Cassé}
 	\begin{columns}[T]
 
 		\begin{column}{.12\textwidth} % The second subdivided column within the first main column
@@ -347,6 +244,109 @@
 \begin{column}{.03\textwidth}\end{column} % Empty spacer column
  
 \begin{column}{.465\textwidth} % The second column
+            
+	\begin{block}{2: Authentification cassée}
+
+		\begin{columns}[T]
+
+			\begin{column}{.01\textwidth}
+			\end{column}
+			\begin{column}{.115\textwidth} % The second subdivided column within the first main column
+				\includegraphics[scale=2.3]{rimlock.png}
+			\end{column}
+
+			\begin{column}{.875\textwidth}
+				\uline{\uline{\textbf{Symptomes}}}
+				\begin{itemize}
+					\item L'authentification n'est pas chiffrée (on peut intercepter les mots de passe)
+				\end{itemize}
+			\end{column}
+		\end{columns}
+		\begin{itemize}
+			\item Le token de session est facilement deviné (nom d'utiliateur, timestamp)
+			\item Mots de passe faibles acceptés (P4ssword)
+			\item ID de session exposé dans les URLs
+			\item Pas de blocage après X tentatives de connexion
+			\item Mots de passe stockés en clair dans les bases de données.
+		\end{itemize}
+		\begin{columns}[T]
+			\begin{column}{.01\textwidth}
+			\end{column}
+			\begin{column}{0.495\textwidth}
+				\vfill
+				\uline{\textbf{Effets}}
+				\begin{itemize}
+					\item Vol d'identité
+					\item Fuite de données sensibles
+					\item Prise de contrôle du serveur par un acteur malveillant.
+				\end{itemize}
+				\vfill
+			\end{column}
+			\begin{column}{0.495\textwidth}
+				\vfill
+				\uline{\textbf{Prévention}}
+				\begin{itemize}
+					\item Obligation d'utiliser des mots de passe forts.
+					\item Tokens de sessions aléatoires
+					\item Cooldown/blockage de l'authentification
+				\end{itemize}
+			\end{column}
+		\end{columns}
+
+
+	\end{block}
+
+	\begin{block}{4: Entité Externe XML}
+		\begin{columns}[T]
+
+			\begin{column}{.12\textwidth} % The second subdivided column within the first main column
+				\includegraphics[scale=1.35]{xml.png}
+			\end{column}
+
+			\begin{column}{.88\textwidth}
+				\uline{\uline{\textbf{Symptomes}}}
+				\begin{itemize}
+					\item L'application accepte du XML ou permets de l'upload de XML
+					\item N'importe lequel des processeurs XML a le
+						\href{https://www.w3schools.com/xml/xml_dtd_intro.asp}{\uline{\textit{DTD}}}
+						activé
+					\item Si l'application utilise du SAML pour l'authentification
+						Single Sign On, vérifier qu'elle n'est pas vulnérable.
+				\end{itemize}
+			\end{column}
+		\end{columns}
+		\begin{itemize}
+			\item Si l'application utilise SOAP $<$ 1.2 vérifier qu'elle n'est
+				pas vulnérable.
+		\end{itemize}
+		\begin{columns}[T]
+			\begin{column}{.01\textwidth}
+			\end{column}
+			\begin{column}{0.495\textwidth}
+				\vfill
+				\uline{\textbf{Effets}}
+				\begin{itemize}
+					\item Attaque par déni de service (notamment l'attaque \textit{Billion
+						Laughs}
+					\item Fuite de données sensibles
+					\item Scan des systèmes internes au SI
+					\item Facilitation d'autres attaques
+				\end{itemize}
+				\vfill
+			\end{column}
+			\begin{column}{0.495\textwidth}
+				\vfill
+				\uline{\textbf{Prévention}}
+				\begin{itemize}
+					\item Utiliser du JSON plutôt que du XML
+					\item Mettre à jour les librairies et processeurs XML
+					\item Désactiver les entités xml externes et le DTD
+					\item Implementer une whitelist coté serveur pour empêcher
+						l'injection de XML hostile.
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
 
 %----------------------------------------------------------------------------------------
 %	RESULTS
